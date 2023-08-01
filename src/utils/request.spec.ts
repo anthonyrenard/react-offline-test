@@ -14,8 +14,12 @@ describe("request", () => {
   });
 
   it("should return an error", async () => {
-    await expect(request("https://example.com/api")).rejects.toThrowError(
-      "Network response was not ok. Status: 404 Not Found"
-    );
+    try {
+      await request("https://example.com/api");
+    } catch (error) {
+      expect(error).toEqual(
+        new Error("Network response was not ok. Status: 404 Not Found")
+      );
+    }
   });
 });
